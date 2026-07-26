@@ -1,0 +1,219 @@
+.gallery-section {
+  position: relative;
+  width: 100%;
+  padding: 8rem 0;
+  background-color: #050505;
+  overflow: hidden;
+}
+
+/* ========================================
+   Slideshow Carousel Layout
+   ======================================== */
+
+.gallery-carousel-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.gallery-track {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 6.2;
+  perspective: 1300px;
+}
+
+/* ========================================
+   Card
+   ======================================== */
+
+.gallery-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  border-radius: 20px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.7);
+}
+
+.gallery-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-card-dim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}
+
+.gallery-card-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 60%, transparent 100%);
+  z-index: 10;
+}
+
+.gallery-card-category {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(0, 240, 255, 0.7);
+}
+
+.gallery-card-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-top: 0.35rem;
+  letter-spacing: -0.02em;
+}
+
+/* ========================================
+   Dot Indicators
+   ======================================== */
+
+.gallery-dots {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.4s ease;
+  padding: 0;
+}
+
+.gallery-dot:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.gallery-dot-active {
+  background: #00f0ff;
+  border-color: rgba(0, 240, 255, 0.5);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+  width: 28px;
+  border-radius: 6px;
+}
+
+/* Ambient Background Glow */
+.gallery-bg-glow {
+  position: absolute;
+  bottom: 10%;
+  left: 5%;
+  width: 45vw;
+  height: 45vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(147, 51, 234, 0.06) 0%, transparent 60%);
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ========================================
+   Light Theme Overrides
+   ======================================== */
+
+html.light-theme .gallery-card {
+  border-color: rgba(226, 232, 240, 0.6) !important;
+  box-shadow: 0 20px 60px -15px rgba(15, 23, 42, 0.15) !important;
+}
+
+html.light-theme .gallery-card-dim {
+  background: rgba(241, 245, 249, 0.55) !important;
+}
+
+html.light-theme .gallery-card-info {
+  background: linear-gradient(0deg, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.3) 60%, transparent 100%) !important;
+}
+
+html.light-theme .gallery-card-category {
+  color: #eb0029 !important;
+}
+
+html.light-theme .gallery-dot {
+  background: rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+html.light-theme .gallery-dot:hover {
+  background: rgba(0, 0, 0, 0.25) !important;
+}
+
+html.light-theme .gallery-dot-active {
+  background: #eb0029 !important;
+  border-color: rgba(235, 0, 41, 0.5) !important;
+  box-shadow: 0 0 12px rgba(235, 0, 41, 0.5) !important;
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+
+@media (max-width: 768px) {
+  .gallery-section {
+    padding: 5rem 0;
+  }
+
+  .gallery-track {
+    aspect-ratio: 16 / 8;
+    perspective: 900px;
+  }
+
+  .gallery-card-title {
+    font-size: 0.9rem;
+  }
+
+  .gallery-card-info {
+    padding: 1rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-track {
+    aspect-ratio: 16 / 9.5;
+    perspective: 700px;
+  }
+
+  .gallery-card {
+    border-radius: 16px;
+  }
+
+  .gallery-card-title {
+    font-size: 0.8rem;
+  }
+
+  .gallery-card-category {
+    font-size: 0.5rem;
+  }
+
+  .gallery-card-info {
+    padding: 0.75rem 1rem;
+  }
+}

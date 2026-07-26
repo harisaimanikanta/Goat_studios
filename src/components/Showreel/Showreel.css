@@ -1,0 +1,96 @@
+.showreel-section {
+  position: relative;
+  width: 100%;
+  padding: 8rem 2rem;
+  background-color: #030308;
+  overflow: hidden;
+}
+
+.showreel-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 24px;
+  overflow: hidden;
+  background-color: #03030a;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9),
+              0 0 30px rgba(0, 240, 255, 0.15);
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.showreel-container:hover {
+  transform: scale(1.02);
+  border-color: rgba(255, 230, 0, 0.8);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95),
+              0 0 50px rgba(255, 230, 0, 0.35),
+              0 0 30px rgba(0, 240, 255, 0.2);
+}
+
+.showreel-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.65) contrast(1.1);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.6s ease;
+}
+
+.showreel-container:hover .showreel-poster {
+  transform: scale(1.06);
+  filter: brightness(0.55) contrast(1.2);
+}
+
+.play-button-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.play-circle {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: rgba(3, 3, 10, 0.7);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(0, 240, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00f0ff;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+}
+
+.showreel-container:hover .play-circle {
+  transform: scale(1.15);
+  background: linear-gradient(135deg, #00f0ff 0%, #ffe600 100%);
+  color: #000000;
+  border-color: #ffffff;
+  box-shadow: 0 0 45px rgba(255, 230, 0, 0.8),
+              0 0 25px rgba(0, 240, 255, 0.6);
+}
+
+.showreel-bg-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 60%);
+  filter: blur(140px);
+  pointer-events: none;
+  z-index: 1;
+}
+

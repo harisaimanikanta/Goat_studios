@@ -1,0 +1,570 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@300;400;500;700;800&family=Orbitron:wght@500;700;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-cyber: "Orbitron", "JetBrains Mono", sans-serif;
+}
+
+/* Base resets for a Cyberpunk Neon Dark Canvas */
+html, body {
+  cursor: none;
+  background-color: #030308;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* Cyber Neon Interactive selections */
+::selection {
+  background-color: rgba(0, 240, 255, 0.4);
+  color: #000000;
+}
+
+/* Cyber Text Strokes */
+.stroke-text {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.9);
+  color: transparent !important;
+}
+
+.stroke-text-cyber {
+  -webkit-text-stroke: 1.5px rgba(0, 240, 255, 0.9);
+  color: transparent !important;
+  text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+.stroke-text-pink {
+  -webkit-text-stroke: 1.5px rgba(255, 230, 0, 0.9);
+  color: transparent !important;
+  text-shadow: 0 0 20px rgba(255, 230, 0, 0.4);
+}
+
+/* Cyberpunk Grid Background Overlay */
+.dot-grid-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image: 
+    linear-gradient(to right, rgba(0, 240, 255, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 230, 0, 0.15) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: 2;
+}
+
+/* Scanlines overlay effect */
+.cyber-scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 4px;
+  opacity: 0.2;
+}
+
+/* Cyber Ambient Background Glow Orbs */
+.bg-orb-purple {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 600px;
+  height: 600px;
+  background-color: rgba(0, 240, 255, 0.15);
+  border-radius: 9999px;
+  filter: blur(140px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bg-orb-blue {
+  position: absolute;
+  bottom: 0%;
+  right: -5%;
+  width: 550px;
+  height: 550px;
+  background-color: rgba(255, 230, 0, 0.08);
+  border-radius: 9999px;
+  filter: blur(140px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Cyber Neon Cards & Scale-Up Animations */
+.cyber-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(12, 16, 32, 0.7) 0%, rgba(6, 8, 16, 0.8) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 16px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8),
+              inset 0 0 15px rgba(0, 240, 255, 0.03);
+}
+
+.cyber-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(0, 240, 255, 0.8);
+  box-shadow: 0 20px 50px -10px rgba(0, 240, 255, 0.3),
+              0 0 30px rgba(255, 230, 0, 0.15),
+              inset 0 0 20px rgba(0, 240, 255, 0.1);
+  animation: cyber-card-pulse 2s infinite ease-in-out;
+}
+
+@keyframes cyber-card-pulse {
+  0%, 100% {
+    border-color: rgba(0, 240, 255, 0.6);
+    box-shadow: 0 20px 50px -10px rgba(0, 240, 255, 0.3),
+                0 0 30px rgba(255, 230, 0, 0.15),
+                inset 0 0 20px rgba(0, 240, 255, 0.1);
+  }
+  50% {
+    border-color: rgba(0, 240, 255, 1);
+    box-shadow: 0 25px 60px -5px rgba(0, 240, 255, 0.5),
+                0 0 45px rgba(255, 230, 0, 0.25),
+                inset 0 0 30px rgba(0, 240, 255, 0.2);
+  }
+}
+
+.cyber-card-pink:hover {
+  border-color: rgba(255, 230, 0, 0.8);
+  box-shadow: 0 20px 50px -10px rgba(255, 230, 0, 0.25),
+              0 0 30px rgba(0, 240, 255, 0.2);
+}
+
+/* Glowing Neon Text & Accents */
+.neon-glow-cyan {
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.8), 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+.neon-glow-pink {
+  text-shadow: 0 0 10px rgba(255, 230, 0, 0.8), 0 0 20px rgba(255, 230, 0, 0.4);
+}
+
+/* Corner HUD Cyber Accents */
+.cyber-corner-tl {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid #00f0ff;
+  border-left: 2px solid #00f0ff;
+}
+
+.cyber-corner-tr {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid #00f0ff;
+  border-right: 2px solid #00f0ff;
+}
+
+.cyber-corner-bl {
+  position: absolute;
+  bottom: -1px;
+  left: -1px;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid #ffe600;
+  border-left: 2px solid #ffe600;
+}
+
+.cyber-corner-br {
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid #ffe600;
+  border-right: 2px solid #ffe600;
+}
+
+/* ==========================================================================
+   ONEPLUS UI STYLED LIGHT THEME (RED #eb0029, BLACK #000000, WHITE #ffffff)
+   ========================================================================== */
+
+html.light-theme,
+html.light-theme body,
+html.light-theme #root,
+html.light-theme .home-container,
+html.light-theme main,
+html.light-theme section,
+html.light-theme .hero-container,
+html.light-theme .featured-work-container,
+html.light-theme .showreel-section,
+html.light-theme .services-container,
+html.light-theme .music-section,
+html.light-theme .gallery-container,
+html.light-theme .team-section,
+html.light-theme .testimonials-section,
+html.light-theme .contact-section,
+html.light-theme .footer-container,
+html.light-theme .project-details-page,
+html.light-theme .team-details-page {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  background-image: none !important;
+}
+
+html.light-theme ::selection {
+  background-color: #eb0029 !important;
+  color: #ffffff !important;
+}
+
+/* Light Theme Dot Grid Overlay & Scanlines - Minimal Stark Monochrome */
+html.light-theme .dot-grid-overlay {
+  opacity: 0.15 !important;
+  background-image: 
+    radial-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px) !important;
+  background-size: 24px 24px !important;
+}
+
+html.light-theme .cyber-scanlines {
+  opacity: 0.02 !important;
+}
+
+/* OnePlus Ambient Red Glows */
+html.light-theme .bg-orb-purple,
+html.light-theme .bg-orb-blue,
+html.light-theme .hero-bg-glow,
+html.light-theme .services-bg-glow,
+html.light-theme .contact-bg-glow,
+html.light-theme .showreel-bg-glow,
+html.light-theme .music-bg-glow,
+html.light-theme .team-bg-glow,
+html.light-theme .testimonials-bg-glow,
+html.light-theme .portfolio-bg-glow {
+  display: block !important;
+  opacity: 0.12 !important;
+  filter: blur(100px) !important;
+  background: radial-gradient(circle, rgba(235, 0, 41, 0.15) 0%, transparent 70%) !important;
+}
+
+/* Section Background Alternation - Crisp White & OnePlus Soft Gray */
+html.light-theme .featured-work-container,
+html.light-theme .services-container,
+html.light-theme .team-section,
+html.light-theme .contact-section {
+  background-color: #ffffff !important;
+}
+
+html.light-theme .hero-container,
+html.light-theme .showreel-section,
+html.light-theme .music-section,
+html.light-theme .gallery-container,
+html.light-theme .testimonials-section,
+html.light-theme .footer-container {
+  background-color: #f7f7f9 !important;
+}
+
+/* Typography & Text Overrides - OnePlus Bold Black & Dark Gray */
+html.light-theme h1,
+html.light-theme h2,
+html.light-theme h3,
+html.light-theme h4,
+html.light-theme h5,
+html.light-theme h6,
+html.light-theme .text-white,
+html.light-theme .text-zinc-100,
+html.light-theme .text-zinc-200 {
+  color: #000000 !important;
+}
+
+html.light-theme p,
+html.light-theme span,
+html.light-theme li,
+html.light-theme .text-zinc-300,
+html.light-theme .text-zinc-400 {
+  color: #222222 !important;
+}
+
+html.light-theme .text-zinc-500,
+html.light-theme .text-zinc-600,
+html.light-theme .text-zinc-700 {
+  color: #555555 !important;
+}
+
+/* Accent Typography in OnePlus Light Theme - Signature Red #eb0029 */
+html.light-theme .text-cyan-400,
+html.light-theme .text-cyan-300,
+html.light-theme .text-cyan-500,
+html.light-theme .text-yellow-400,
+html.light-theme .text-yellow-300,
+html.light-theme .text-yellow-500,
+html.light-theme .text-violet-400,
+html.light-theme .text-purple-500,
+html.light-theme .text-pink-500 {
+  color: #eb0029 !important;
+}
+
+/* Stroke / Outline Typography in Light Theme */
+html.light-theme .stroke-text {
+  -webkit-text-stroke: 1.5px #000000 !important;
+  color: transparent !important;
+}
+
+html.light-theme .stroke-text-cyber {
+  -webkit-text-stroke: 1.5px #eb0029 !important;
+  color: transparent !important;
+  text-shadow: none !important;
+}
+
+html.light-theme .stroke-text-pink {
+  -webkit-text-stroke: 1.5px #eb0029 !important;
+  color: transparent !important;
+}
+
+/* Glassmorphic Cards & Containers in OnePlus Style */
+html.light-theme .bg-black,
+html.light-theme .bg-black\/90,
+html.light-theme .bg-black\/80,
+html.light-theme .bg-black\/60,
+html.light-theme .bg-black\/50,
+html.light-theme .bg-black\/40,
+html.light-theme .bg-black\/95,
+html.light-theme .bg-zinc-950,
+html.light-theme .bg-zinc-900 {
+  background-color: #ffffff !important;
+}
+
+html.light-theme .cyber-card,
+html.light-theme .service-card,
+html.light-theme .project-card,
+html.light-theme .team-card,
+html.light-theme .testimonial-card,
+html.light-theme .music-card,
+html.light-theme .contact-card,
+html.light-theme .gallery-card,
+html.light-theme .showreel-video-wrapper,
+html.light-theme .music-player-container,
+html.light-theme .contact-form-card,
+html.light-theme .gallery-card-inner {
+  background: #ffffff !important;
+  border-color: #e5e5e7 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+html.light-theme .cyber-card:hover,
+html.light-theme .service-card:hover,
+html.light-theme .project-card:hover,
+html.light-theme .team-card:hover,
+html.light-theme .testimonial-card:hover,
+html.light-theme .music-card:hover,
+html.light-theme .contact-card:hover {
+  border-color: #eb0029 !important;
+  box-shadow: 0 12px 30px rgba(235, 0, 41, 0.12) !important;
+  transform: translateY(-3px) !important;
+  animation: none !important;
+}
+
+/* HUD Corner Accents - OnePlus Red / Black */
+html.light-theme .cyber-corner-tl,
+html.light-theme .cyber-corner-tr,
+html.light-theme .cyber-corner-bl,
+html.light-theme .cyber-corner-br {
+  border-color: #eb0029 !important;
+}
+
+/* Crisp OnePlus Borders */
+html.light-theme .border-cyan-400\/50,
+html.light-theme .border-cyan-500\/30,
+html.light-theme .border-cyan-500\/40,
+html.light-theme .border-cyan-400\/30,
+html.light-theme .border-cyan-500\/20,
+html.light-theme .border-cyan-400,
+html.light-theme .border-yellow-400\/50,
+html.light-theme .border-yellow-500\/30,
+html.light-theme .border-yellow-400\/30,
+html.light-theme .border-yellow-500,
+html.light-theme .border-white\/10,
+html.light-theme .border-white\/20,
+html.light-theme .border-white\/30,
+html.light-theme .border-zinc-900,
+html.light-theme .border-zinc-800 {
+  border-color: #e5e5e7 !important;
+}
+
+/* Shadow Overrides */
+html.light-theme [class*="shadow-[0_0_"] {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Primary Action Buttons & CTAs - OnePlus Red Fills */
+html.light-theme .bg-cyan-400,
+html.light-theme .bg-cyan-500,
+html.light-theme .bg-yellow-500,
+html.light-theme .bg-purple-500 {
+  background: #eb0029 !important;
+  color: #ffffff !important;
+}
+
+html.light-theme .magnetic-btn {
+  background: #eb0029 !important;
+  color: #ffffff !important;
+  border-color: #eb0029 !important;
+  box-shadow: 0 4px 14px rgba(235, 0, 41, 0.25) !important;
+  transition: all 0.3s ease !important;
+}
+
+html.light-theme .magnetic-btn:hover {
+  background: #000000 !important;
+  border-color: #000000 !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+  transform: translateY(-2px) !important;
+}
+
+html.light-theme .bg-gradient-to-r.from-cyan-400.to-yellow-500,
+html.light-theme .bg-gradient-to-tr.from-cyan-400.to-yellow-500,
+html.light-theme .bg-gradient-to-r.from-cyan-500.to-yellow-500 {
+  background: linear-gradient(135deg, #eb0029 0%, #000000 100%) !important;
+  color: #ffffff !important;
+}
+
+/* Navbar in OnePlus Light Theme */
+html.light-theme .navbar-header {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-bottom: 1px solid #e5e5e7 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
+}
+
+html.light-theme .navbar-header.scrolled {
+  background: #ffffff !important;
+  border-color: #d1d1d6 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light-theme .nav-link {
+  color: #000000 !important;
+  font-weight: 600 !important;
+}
+
+html.light-theme .nav-link:hover,
+html.light-theme .nav-link.active {
+  color: #eb0029 !important;
+  text-shadow: none !important;
+  background: rgba(235, 0, 41, 0.06) !important;
+  border-radius: 8px !important;
+}
+
+html.light-theme .nav-link-dot {
+  background-color: #eb0029 !important;
+  box-shadow: 0 0 10px rgba(235, 0, 41, 0.5) !important;
+}
+
+html.light-theme .mobile-nav-overlay {
+  background: rgba(255, 255, 255, 0.98) !important;
+}
+
+html.light-theme .mobile-nav-container {
+  background: #ffffff !important;
+  border-color: #e5e5e7 !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Inputs & Form Controls */
+html.light-theme input,
+html.light-theme textarea,
+html.light-theme select {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #e5e5e7 !important;
+  border-radius: 8px !important;
+}
+
+html.light-theme input::placeholder,
+html.light-theme textarea::placeholder {
+  color: #888888 !important;
+}
+
+html.light-theme input:focus,
+html.light-theme textarea:focus {
+  border-color: #eb0029 !important;
+  box-shadow: 0 0 0 3px rgba(235, 0, 41, 0.15) !important;
+}
+
+/* Map Blueprint Container in Light Mode */
+html.light-theme .map-blueprint-container {
+  background-color: #ffffff !important;
+  border-color: #e5e5e7 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light-theme .map-grid-lines {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px) !important;
+}
+
+/* Right Rail Scroll Bar in Light Theme */
+html.light-theme .fixed.right-8 span {
+  color: #000000 !important;
+}
+
+html.light-theme .fixed.right-8 .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+html.light-theme .fixed.right-8 .bg-purple-500 {
+  background-color: #eb0029 !important;
+}
+
+/* ==========================================================================
+   PROJECT CARDS & IMAGE OVERLAYS (ONEPLUS RED BIG TEXT / WHITE SMALL TEXT)
+   ========================================================================== */
+
+html.light-theme .project-card-container {
+  background-color: #0d0d12 !important;
+  border-color: #e5e5e7 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12) !important;
+}
+
+html.light-theme .project-card-container .project-overlay {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%) !important;
+  opacity: 0.9 !important;
+}
+
+html.light-theme .project-card-container .project-content * {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9) !important;
+}
+
+/* Bigger Text (Title) -> Red */
+html.light-theme .project-card-container .project-content h3 {
+  color: #eb0029 !important;
+}
+
+/* Smaller Text (Category & Year) -> White */
+html.light-theme .project-card-container .project-content span,
+html.light-theme .project-card-container .project-content p,
+html.light-theme .project-card-container .project-content .text-zinc-400,
+html.light-theme .project-card-container .project-content .text-white {
+  color: #ffffff !important;
+}
+
+html.light-theme .project-card-container .arrow-nav-btn {
+  background: rgba(0, 0, 0, 0.85) !important;
+  color: #eb0029 !important;
+  border-color: rgba(235, 0, 41, 0.4) !important;
+}
+
+html.light-theme .project-card-container .arrow-nav-btn:hover {
+  background: #eb0029 !important;
+  color: #ffffff !important;
+  border-color: #eb0029 !important;
+}

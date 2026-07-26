@@ -1,0 +1,56 @@
+.testimonials-section {
+  position: relative;
+  width: 100%;
+  padding: 8rem 2rem;
+  background-color: #030308;
+  overflow: hidden;
+}
+
+.testimonial-glass-card {
+  background: linear-gradient(135deg, rgba(12, 16, 32, 0.85) 0%, rgba(6, 8, 20, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 24px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9),
+              0 0 40px rgba(0, 240, 255, 0.15),
+              0 0 20px rgba(255, 230, 0, 0.1);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.testimonial-glass-card:hover {
+  border-color: rgba(0, 240, 255, 0.6);
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.95),
+              0 0 50px rgba(0, 240, 255, 0.25),
+              0 0 30px rgba(255, 230, 0, 0.2);
+}
+
+.testimonial-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #1a1a2e;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.testimonial-dot.active {
+  background-color: #00f0ff;
+  transform: scale(1.4);
+  box-shadow: 0 0 12px #00f0ff;
+  border-color: #00f0ff;
+}
+
+.testimonials-bg-glow {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  width: 55vw;
+  height: 55vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 60%);
+  filter: blur(140px);
+  pointer-events: none;
+  z-index: 1;
+}

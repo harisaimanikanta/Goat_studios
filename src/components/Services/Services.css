@@ -1,0 +1,105 @@
+.services-section {
+  position: relative;
+  width: 100%;
+  padding: 6rem 1.5rem;
+  background-color: #030308;
+  overflow: hidden;
+}
+
+.services-unit-wrapper {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.services-hud-bar {
+  background: rgba(6, 8, 20, 0.85);
+  border-color: rgba(0, 240, 255, 0.25);
+}
+
+.services-card-viewport {
+  background: linear-gradient(135deg, rgba(12, 16, 32, 0.9) 0%, rgba(6, 8, 20, 0.95) 100%);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8),
+              inset 0 0 25px rgba(0, 240, 255, 0.04);
+}
+
+.services-nav-arrow {
+  cursor: pointer;
+}
+
+.services-ambient-glow {
+  position: absolute;
+  bottom: -20%;
+  right: -10%;
+  width: 55vw;
+  height: 55vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, transparent 60%);
+  filter: blur(140px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   ONEPLUS UI LIGHT THEME OVERRIDES FOR SERVICES SLIDESHOW
+   ========================================================================== */
+
+html.light-theme .services-hud-bar {
+  background: #ffffff !important;
+  border-color: #e5e5e7 !important;
+}
+
+html.light-theme .services-hud-bar span.text-cyan-400 {
+  color: #eb0029 !important;
+}
+
+html.light-theme .services-hud-bar span.bg-cyan-400 {
+  background-color: #eb0029 !important;
+}
+
+html.light-theme .services-card-viewport {
+  background: #ffffff !important;
+  border-color: #e5e5e7 !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light-theme .services-card-viewport h3 {
+  color: #000000 !important;
+}
+
+html.light-theme .services-card-viewport span.text-yellow-400 {
+  color: #eb0029 !important;
+}
+
+html.light-theme .services-card-viewport span.text-cyan-400 {
+  color: #eb0029 !important;
+  border-color: rgba(235, 0, 41, 0.3) !important;
+  background-color: rgba(235, 0, 41, 0.06) !important;
+}
+
+html.light-theme .services-card-viewport p {
+  color: #333333 !important;
+}
+
+html.light-theme .services-card-viewport span.text-cyan-300 {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #e5e5e7 !important;
+}
+
+html.light-theme .services-nav-arrow {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #e5e5e7 !important;
+}
+
+html.light-theme .services-nav-arrow:hover {
+  background: #eb0029 !important;
+  color: #ffffff !important;
+  border-color: #eb0029 !important;
+}
+
+html.light-theme .services-dots-container button.bg-cyan-400 {
+  background-color: #eb0029 !important;
+  box-shadow: 0 0 12px rgba(235, 0, 41, 0.6) !important;
+}

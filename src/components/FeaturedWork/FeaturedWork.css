@@ -1,0 +1,38 @@
+.portfolio-section {
+  position: relative;
+  width: 100%;
+  padding: 10rem 2rem;
+  background-color: #030303;
+  overflow: hidden;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+@media (min-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+  }
+
+  /* Create premium asymmetrical offsets */
+  .portfolio-grid > div:nth-child(even) {
+    transform: translateY(3rem);
+  }
+}
+
+.portfolio-bg-glow {
+  position: absolute;
+  top: 30%;
+  left: 10%;
+  width: 40vw;
+  height: 40vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 60%);
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 1;
+}

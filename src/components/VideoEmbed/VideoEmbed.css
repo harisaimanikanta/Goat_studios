@@ -1,0 +1,129 @@
+/* ========================================
+   Video Loading Animation
+   Works in both dark and light themes
+   ======================================== */
+
+.video-loader-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #030308;
+}
+
+.video-loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Spinning Ring */
+.video-loader-ring {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 240, 255, 0.15);
+  position: relative;
+  animation: loaderPulseGlow 2s ease-in-out infinite;
+}
+
+.video-loader-ring-inner {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: #00f0ff;
+  border-right-color: #ffe600;
+  animation: loaderSpin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+/* Pulsing Text */
+.video-loader-text {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.4em;
+  color: rgba(0, 240, 255, 0.7);
+  animation: loaderTextPulse 1.5s ease-in-out infinite;
+}
+
+/* Scanning Progress Bar */
+.video-loader-bar {
+  width: 120px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.video-loader-bar-fill {
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #00f0ff, #ffe600, transparent);
+  border-radius: 2px;
+  animation: loaderBarScan 1.5s ease-in-out infinite;
+}
+
+/* === Keyframes === */
+
+@keyframes loaderSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes loaderPulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(0, 240, 255, 0.1); }
+  50% { box-shadow: 0 0 30px rgba(0, 240, 255, 0.25); }
+}
+
+@keyframes loaderTextPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes loaderBarScan {
+  0% { transform: translateX(-120px); }
+  100% { transform: translateX(300px); }
+}
+
+/* ========================================
+   Light Theme Overrides
+   ======================================== */
+
+html.light-theme .video-loader-overlay {
+  background: #f1f5f9 !important;
+}
+
+html.light-theme .video-loader-ring {
+  border-color: rgba(235, 0, 41, 0.15) !important;
+}
+
+html.light-theme .video-loader-ring-inner {
+  border-top-color: #eb0029 !important;
+  border-right-color: #000000 !important;
+}
+
+html.light-theme .video-loader-text {
+  color: #eb0029 !important;
+}
+
+html.light-theme .video-loader-bar {
+  background: rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light-theme .video-loader-bar-fill {
+  background: linear-gradient(90deg, transparent, #eb0029, #000000, transparent) !important;
+}
+
+html.light-theme .video-loader-ring {
+  box-shadow: 0 0 15px rgba(235, 0, 41, 0.15) !important;
+  animation: loaderPulseGlowLight 2s ease-in-out infinite !important;
+}
+
+@keyframes loaderPulseGlowLight {
+  0%, 100% { box-shadow: 0 0 15px rgba(37, 99, 235, 0.1); }
+  50% { box-shadow: 0 0 30px rgba(37, 99, 235, 0.25); }
+}

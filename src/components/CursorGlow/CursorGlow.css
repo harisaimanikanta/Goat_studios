@@ -1,0 +1,52 @@
+.cursor-glow-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate3d(-50%, -50%, 0);
+  background-color: rgba(255, 255, 255, 0.95);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  mix-blend-mode: difference;
+}
+
+.cursor-glow-container.hovered {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 1);
+  mix-blend-mode: difference;
+}
+
+.cursor-glow-container.clicked {
+  width: 14px;
+  height: 14px;
+  background-color: rgba(139, 92, 246, 1);
+  mix-blend-mode: normal;
+}
+
+/* Outer background glow */
+.cursor-ambient-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate3d(-50%, -50%, 0);
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(59, 130, 246, 0.03) 50%, transparent 70%);
+  transition: width 0.5s ease, height 0.5s ease;
+  filter: blur(20px);
+}
+
+.cursor-ambient-glow.hovered {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.25) 0%, rgba(59, 130, 246, 0.05) 50%, transparent 70%);
+}
