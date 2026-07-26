@@ -210,13 +210,13 @@ export default function Music() {
             </div>
           </div>
 
-          {/* Right panel: Active controls & interactive canvas */}
-          <div className="lg:col-span-7 p-6 md:p-8 flex flex-col justify-between min-h-[400px]">
+          {/* Right panel: Active YouTube Video Player & Interactive controls */}
+          <div className="lg:col-span-7 p-6 md:p-8 flex flex-col justify-between min-h-[420px]">
             {/* Header */}
             <div className="flex justify-between items-start">
               <div>
                 <span className="text-[10px] font-mono text-yellow-400 tracking-[0.3em] uppercase block font-bold">
-                  [SYNTH_MODULATION_ENGINE]
+                  [GOAT_STUDIOS_OFFICIAL_TRACK]
                 </span>
                 <h3 className="text-2xl font-mono font-bold tracking-tight text-white mt-1">
                   {currentTrack.title}
@@ -231,15 +231,20 @@ export default function Music() {
               </div>
             </div>
 
-            {/* Visualizer Canvas container */}
-            <div className="my-8">
-              <div className="flex justify-between items-center text-xs font-mono text-cyan-400 mb-2 font-bold">
-                <span>DIGITAL AUDIO WAVEFORM // HERTZ_HARMONICS</span>
-                <span className={isPlaying ? "text-yellow-400 animate-pulse" : "text-zinc-500"}>
-                  {isPlaying ? "● MODULATOR ACTIVE" : "○ STANDBY"}
-                </span>
-              </div>
-              <canvas ref={canvasRef} className="player-visualizer-canvas" />
+            {/* YouTube Video Player in Music Section */}
+            <div className="my-6 relative w-full aspect-video rounded-xl overflow-hidden border border-cyan-500/30 shadow-[0_0_30px_rgba(0,240,255,0.2)] bg-black">
+              <div className="cyber-corner-tl opacity-70 z-20 pointer-events-none" />
+              <div className="cyber-corner-tr opacity-70 z-20 pointer-events-none" />
+              <div className="cyber-corner-bl opacity-70 z-20 pointer-events-none" />
+              <div className="cyber-corner-br opacity-70 z-20 pointer-events-none" />
+              <iframe
+                src={`https://www.youtube.com/embed/${currentTrack.youtubeId || "uXE4OrL0uXw"}?autoplay=0&rel=0&modestbranding=1`}
+                title={currentTrack.title}
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ border: 'none' }}
+              />
             </div>
 
             {/* Controls interface */}
