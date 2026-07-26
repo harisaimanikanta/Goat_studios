@@ -5,6 +5,8 @@ export interface TeamMember {
   studioLocation: string;
   bio: string;
   image: string;
+  upiId?: string;
+  qrCode?: string;
   socials: {
     instagram?: string;
     twitter?: string;
@@ -23,7 +25,6 @@ export const teamData: TeamMember[] = [
     image: "/nouser.jpg",
     socials: {
       instagram: "https://www.instagram.com/md_nooruddin39?igsh=OTZsam13ZGs5eDl1",
-
     }
   },
   {
@@ -33,9 +34,10 @@ export const teamData: TeamMember[] = [
     studioLocation: "",
     bio: "Master of After Effects and Blender, crafting immersive virtual worlds through cinematic motion design, stunning 3D visuals, and creative storytelling.",
     image: "/f3.jpg",
+    upiId: "6303328461-3@ybl",
+    qrCode: "/sarkar-qr.png",
     socials: {
       instagram: "https://www.instagram.com/sarkar.aep?igsh=MTBpNzczZW80enBhcg==",
-
     }
   },
   {
