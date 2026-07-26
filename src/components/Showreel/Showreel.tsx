@@ -4,7 +4,7 @@ import { Play } from "lucide-react";
 import VideoEmbed from "../VideoEmbed/VideoEmbed";
 import "./Showreel.css";
 
-const SHOWREEL_YOUTUBE_URL = "https://www.youtube.com/embed/uXE4OrL0uXw";
+const SHOWREEL_YOUTUBE_URL = "https://www.youtube.com/embed/uXE4OrL0uXw?si=tU67C4yg71kAu4r8";
 
 export default function Showreel() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -58,7 +58,7 @@ export default function Showreel() {
           )}
 
           {/* Cover Art Poster (visible when not playing) */}
-          <div 
+          <div
             className={`absolute inset-0 z-10 transition-opacity duration-700 cursor-pointer ${isPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
             onClick={handlePlay}
           >
@@ -72,12 +72,12 @@ export default function Showreel() {
 
           {/* Interactive Play Button (visible when not playing) */}
           {!isPlaying && (
-            <div 
+            <div
               className="play-button-wrap z-20 cursor-pointer"
               onClick={handlePlay}
             >
               <div className="play-circle">
-                <Play className="w-8 h-8 fill-current ml-1" />
+                <Play className="w-5 h-5 fill-current ml-0.5" />
               </div>
               <span className="text-xs font-mono tracking-[0.3em] text-cyan-300 group-hover:text-yellow-400 font-bold transition-colors duration-400 drop-shadow-md">
                 PLAY FILM • 8K CYBER_REEL
@@ -85,11 +85,7 @@ export default function Showreel() {
             </div>
           )}
 
-          {/* Lower Floating Cinematic Tag */}
-          <div className={`absolute bottom-8 left-8 right-8 flex justify-between items-center text-[0.65rem] tracking-[0.25em] font-mono text-cyan-400 z-20 font-bold bg-black/60 p-3 rounded-lg backdrop-blur-md border border-cyan-500/30 transition-opacity duration-500 ${isPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-            <div>RESOLUTION &mdash; 8K ULTRA HDR</div>
-            <div>FPS &mdash; 60 UNREAL_5</div>
-          </div>
+
         </motion.div>
       </div>
     </section>

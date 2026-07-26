@@ -57,18 +57,25 @@
 }
 
 .play-circle {
-  width: 96px;
-  height: 96px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   background: rgba(3, 3, 10, 0.7);
   backdrop-filter: blur(15px);
-  border: 2px solid rgba(0, 240, 255, 0.5);
+  border: 1.5px solid rgba(0, 240, 255, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #00f0ff;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+@media (max-width: 640px) {
+  .play-circle {
+    width: 52px;
+    height: 52px;
+  }
 }
 
 .showreel-container:hover .play-circle {
