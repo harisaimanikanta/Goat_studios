@@ -170,8 +170,12 @@ export default function TeamDetails() {
                   {member.qrCode ? (
                     <>
                       <h4 className="text-xs font-mono text-cyan-400 font-bold tracking-widest uppercase">Support / Direct UPI</h4>
-                      <div className="w-44 h-44 bg-white p-2 rounded-xl border border-yellow-500/50 shadow-[0_0_20px_rgba(250,204,21,0.3)] flex items-center justify-center overflow-hidden">
-                        <img src={member.qrCode} alt="PhonePe QR Code" className="w-full h-full object-contain" />
+                      <div className="w-64 h-64 sm:w-72 sm:h-72 rounded-2xl border border-yellow-500/50 shadow-[0_0_30px_rgba(250,204,21,0.3)] flex items-center justify-center overflow-hidden bg-black/40 p-1">
+                        <img 
+                          src={member.qrCode} 
+                          alt="PhonePe QR Code" 
+                          className="w-full h-full object-contain mix-blend-screen hover:scale-105 transition-transform duration-300" 
+                        />
                       </div>
                       {member.upiId && (
                         <div className="flex flex-col items-center gap-1.5 mt-1 w-full">
