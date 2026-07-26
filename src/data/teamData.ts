@@ -17,50 +17,49 @@ export const teamData: TeamMember[] = [
   {
     id: "01",
     name: "Mr.Nooruddin",
-    role: "Founder & Creative Director",
+    role: "Creative Director",
     studioLocation: "",
-    bio: "",
+    bio: "From concept to execution, I lead teams of designers, 3D artists, filmmakers, and music producers to create work that inspires, connects, and leaves a lasting impact.",
     image: "/nouser.jpg",
     socials: {
       instagram: "https://www.instagram.com/md_nooruddin39?igsh=OTZsam13ZGs5eDl1",
-      twitter: "#",
-      linkedin: "#"
+
     }
   },
   {
     id: "02",
-    name: "",
-    role: "Founder & 3D Artist",
+    name: "Ram Charan Pidamarthi",
+    role: "2D & 3D Artist",
     studioLocation: "",
-    bio: "Master of AfterEffects and Blender on crafting Virtual worlds.",
+    bio: "Master of After Effects and Blender, crafting immersive virtual worlds through cinematic motion design, stunning 3D visuals, and creative storytelling.",
     image: "/f3.jpg",
     socials: {
       instagram: "https://www.instagram.com/sarkar.aep?igsh=MTBpNzczZW80enBhcg==",
-      linkedin: "#"
+
     }
   },
   {
     id: "03",
     name: "Md Mohiuddin Azad Mesbah",
-    role: "3D ",
-    studioLocation: "GLOBAL",
-    bio: "Kai bridges physical code and visual rhythm, bringing smooth inertial mechanics to life.",
+    role: "3D Artist",
+    studioLocation: "Bangladesh",
+    bio: "Creating immersive 3D worlds, cinematic visuals, and digital experiences that leave a lasting impression.",
     image: "/f2.jpg",
     socials: {
       instagram: "https://www.instagram.com/mohi_uddin_96?igsh=MWV6MzM5YnI3MWVvcg==",
-      twitter: "#"
+
     }
   },
   {
     id: "04",
     name: "Vanapalli Sahil",
     role: "Sound Architect & Composer",
-    studioLocation: "GLOBAL",
-    bio: "Using modular analog synthesizers, Marcus scores the custom acoustic monoliths of our cinematic experiences.",
+    studioLocation: "Hyderabad",
+    bio: "DJ & Music Producer delivering powerful drops, immersive melodies, and genre-defying productions designed for clubs, festivals, and beyond.",
     image: "/f1.jpeg",
     socials: {
       twitter: "#",
-      linkedin: "#"
+
     }
   }
 ];
