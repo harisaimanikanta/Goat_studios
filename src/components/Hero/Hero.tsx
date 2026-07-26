@@ -135,7 +135,7 @@ export default function Hero() {
           <motion.h1
             variants={blurReveal}
             custom={0.2}
-            className="text-[12.5vw] sm:text-7xl md:text-[8rem] lg:text-[110px] font-black leading-[0.85] tracking-tighter uppercase text-white drop-shadow-[0_0_35px_rgba(0,240,255,0.2)]"
+            className="text-[8.5vw] sm:text-6xl md:text-[7.5rem] lg:text-[105px] font-black leading-[0.88] tracking-tighter uppercase text-white drop-shadow-[0_0_35px_rgba(0,240,255,0.2)] max-w-full px-2"
           >
             WE DESIGN
           </motion.h1>
@@ -153,7 +153,7 @@ export default function Hero() {
           <motion.h1
             variants={blurReveal}
             custom={0.38}
-            className="text-[12.5vw] sm:text-7xl md:text-[8rem] lg:text-[110px] font-black leading-[0.85] tracking-tighter uppercase text-transparent stroke-text drop-shadow-[0_0_30px_rgba(255,230,0,0.3)]"
+            className="text-[8.5vw] sm:text-6xl md:text-[7.5rem] lg:text-[105px] font-black leading-[0.88] tracking-tighter uppercase text-transparent stroke-text drop-shadow-[0_0_30px_rgba(255,230,0,0.3)] max-w-full px-2"
           >
             3D ELEMENTS AND ENVIRONMENTS
           </motion.h1>
@@ -164,7 +164,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 text-base md:text-xl text-zinc-300 max-w-2xl font-sans tracking-wide leading-relaxed font-light"
+          className="mt-6 text-sm sm:text-base md:text-xl text-zinc-300 max-w-2xl font-sans tracking-wide leading-relaxed font-light px-4"
         >
           Crafting cinematic CGI, immersive motion, and digital experiences that leave a lasting impression.
         </motion.p>

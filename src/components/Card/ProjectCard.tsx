@@ -74,27 +74,27 @@ export default function ProjectCard({ project, isVideoPlaying, onPlayVideo, onCl
         )}
       </div>
 
-      <div className={`project-content flex flex-col justify-end transition-opacity duration-400 ${isVideoPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      <div className={`project-content flex flex-col justify-end transition-opacity duration-400 p-4 sm:p-6 ${isVideoPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         {/* Category & Year (Smaller Text) */}
-        <div className="flex justify-between items-center text-xs tracking-widest text-white font-mono mb-2">
-          <span className="flex items-center gap-1.5 font-bold text-white">
-            <span className="w-1.5 h-1.5 bg-[#eb0029] rounded-full animate-pulse" />
+        <div className="flex justify-between items-center text-[10px] sm:text-xs tracking-widest text-white font-mono mb-1.5 sm:mb-2">
+          <span className="flex items-center gap-1 sm:gap-1.5 font-bold text-white">
+            <span className="w-1.5 h-1.5 bg-[#eb0029] rounded-full animate-pulse flex-shrink-0" />
             {project.category}
           </span>
           <span className="text-white/90 font-bold">{project.year}</span>
         </div>
 
-        {/* Title (Bigger Text) */}
-        <div className="flex justify-between items-end">
-          <h3 className="text-2xl md:text-3xl font-mono font-bold tracking-tight text-[#eb0029] group-hover:text-red-400 transition-colors duration-400">
+        {/* Title (Bigger Text - Reduced on mobile) */}
+        <div className="flex justify-between items-end gap-2">
+          <h3 className="text-lg sm:text-2xl md:text-3xl font-mono font-bold tracking-tight text-[#eb0029] group-hover:text-red-400 transition-colors duration-400">
             {project.title}
           </h3>
           
           <button
             onClick={handleArrowClick}
-            className="arrow-nav-btn w-10 h-10 rounded-xl bg-black/80 border border-[#eb0029]/40 flex items-center justify-center text-[#eb0029] hover:bg-[#eb0029] hover:text-white hover:border-[#eb0029] hover:shadow-[0_0_15px_rgba(235,0,41,0.6)] transition-all duration-400 flex-shrink-0"
+            className="arrow-nav-btn w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-black/80 border border-[#eb0029]/40 flex items-center justify-center text-[#eb0029] hover:bg-[#eb0029] hover:text-white hover:border-[#eb0029] hover:shadow-[0_0_15px_rgba(235,0,41,0.6)] transition-all duration-400 flex-shrink-0"
           >
-            <ArrowUpRight className="w-5 h-5 hover:rotate-45 transition-transform duration-400" />
+            <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 hover:rotate-45 transition-transform duration-400" />
           </button>
         </div>
       </div>
