@@ -4,7 +4,7 @@ import { Play } from "lucide-react";
 import VideoEmbed from "../VideoEmbed/VideoEmbed";
 import "./Showreel.css";
 
-const SHOWREEL_YOUTUBE_URL = "https://www.youtube.com/embed/dQw4w9WgXcQ";
+const SHOWREEL_YOUTUBE_URL = "https://www.youtube.com/embed/uXE4OrL0uXw";
 
 export default function Showreel() {
   const [isPlaying, setIsPlaying] = useState(false);
