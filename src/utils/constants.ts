@@ -12,6 +12,7 @@ export const BRAND_INFO = {
 export const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/g0atstudios/",
   twitter: "https://x.com/G0ATSTUDIOS",
+  youtube: "https://www.youtube.com/@GOATSTUDIOS01",
 };
 
 export const SECTIONS = [

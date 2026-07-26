@@ -1,6 +1,6 @@
 import React from "react";
 import { SECTIONS, SOCIAL_LINKS, BRAND_INFO } from "../../utils/constants";
-import { Instagram, Twitter } from "lucide-react";
+import { Instagram, Twitter, Youtube } from "lucide-react";
 import GoatLogo from "../GoatLogo";
 import "./Footer.css";
 
@@ -52,6 +52,15 @@ export default function Footer() {
                 aria-label="Twitter"
               >
                 <Twitter className="w-4 h-4" />
+              </a>
+              <a
+                href={SOCIAL_LINKS.youtube}
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-xl bg-black/80 border border-cyan-400/40 hover:border-yellow-500 text-cyan-400 hover:text-yellow-400 hover:shadow-[0_0_15px_rgba(255,230,0,0.4)] flex items-center justify-center transition-all"
+                aria-label="YouTube"
+              >
+                <Youtube className="w-4 h-4" />
               </a>
             </div>
           </div>
