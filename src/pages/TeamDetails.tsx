@@ -170,19 +170,17 @@ export default function TeamDetails() {
                   {member.qrCode ? (
                     <>
                       <h4 className="text-xs font-mono text-cyan-400 font-bold tracking-widest uppercase">Support / Direct UPI</h4>
-                      <div className="w-64 h-64 sm:w-72 sm:h-72 rounded-2xl border border-yellow-500/50 shadow-[0_0_30px_rgba(250,204,21,0.3)] flex items-center justify-center overflow-hidden bg-black/40 p-1">
-                        <img 
-                          src={member.qrCode} 
-                          alt="PhonePe QR Code" 
-                          className="w-full h-full object-contain mix-blend-screen hover:scale-105 transition-transform duration-300" 
-                        />
-                      </div>
+                      <img 
+                        src={member.qrCode} 
+                        alt="PhonePe QR Code" 
+                        className="w-64 h-64 sm:w-72 sm:h-72 object-contain mix-blend-screen hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_25px_rgba(250,204,21,0.45)]" 
+                      />
                       {member.upiId && (
-                        <div className="flex flex-col items-center gap-1.5 mt-1 w-full">
+                        <div className="flex flex-col items-center gap-1.5 w-full">
                           <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">UPI ID</span>
                           <a
                             href={`upi://pay?pa=${member.upiId}&pn=${encodeURIComponent(member.name)}&cu=INR`}
-                            className="px-4 py-2 rounded-xl bg-gradient-to-r from-yellow-500/20 to-cyan-500/20 border border-yellow-400/60 text-yellow-300 font-mono text-xs font-bold hover:bg-yellow-400 hover:text-black transition-all shadow-[0_0_15px_rgba(250,204,21,0.2)] tracking-wider"
+                            className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-yellow-500/20 to-cyan-500/20 border border-yellow-400/60 text-yellow-300 font-mono text-xs font-bold hover:bg-yellow-400 hover:text-black transition-all shadow-[0_0_15px_rgba(250,204,21,0.2)] tracking-wider"
                           >
                             {member.upiId}
                           </a>
