@@ -33,7 +33,7 @@ export const teamData: TeamMember[] = [
     role: "Founder & 3D Artist",
     studioLocation: "",
     bio: "Master of AfterEffects and Blender on crafting Virtual worlds.",
-    image: "/nouser.jpg",
+    image: "/f3.jpg",
     socials: {
       instagram: "https://www.instagram.com/sarkar.aep?igsh=MTBpNzczZW80enBhcg==",
       linkedin: "#"
@@ -45,7 +45,7 @@ export const teamData: TeamMember[] = [
     role: "3D ",
     studioLocation: "GLOBAL",
     bio: "Kai bridges physical code and visual rhythm, bringing smooth inertial mechanics to life.",
-    image: "/nouser.jpg",
+    image: "/f2.jpg",
     socials: {
       instagram: "https://www.instagram.com/mohi_uddin_96?igsh=MWV6MzM5YnI3MWVvcg==",
       twitter: "#"
