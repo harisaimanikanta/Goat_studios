@@ -1,16 +1,10 @@
 import React from "react";
 import { SECTIONS, SOCIAL_LINKS, BRAND_INFO } from "../../utils/constants";
-import { ArrowUp, Instagram, Twitter } from "lucide-react";
-import MagneticButton from "../Button/MagneticButton";
+import { Instagram, Twitter } from "lucide-react";
 import GoatLogo from "../GoatLogo";
 import "./Footer.css";
 
 export default function Footer() {
-  const handleScrollToTop = (e: React.MouseEvent) => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   const handleNavClick = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     const target = document.getElementById(id);
@@ -22,7 +16,7 @@ export default function Footer() {
   return (
     <footer className="footer-section border-t border-cyan-500/20">
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Top 3-Column Navigation Grid */}
+        {/* Top Navigation Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start mb-12">
           {/* Brand info column */}
           <div className="md:col-span-5 flex flex-col gap-6">
@@ -63,12 +57,12 @@ export default function Footer() {
           </div>
 
           {/* Nav links column (SITEMAP ARCHITECTURE) */}
-          <div className="md:col-span-6">
+          <div className="md:col-span-7">
             <h4 className="text-xs font-mono text-cyan-400 font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-cyan-400" />
               SITEMAP ARCHITECTURE
             </h4>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {SECTIONS.map(({ id, label }) => (
                 <a
                   key={id}
@@ -81,21 +75,18 @@ export default function Footer() {
               ))}
             </div>
           </div>
-
-          {/* Action trigger column */}
-          <div className="md:col-span-1 flex items-start justify-end">
-            <MagneticButton
-              onClick={handleScrollToTop}
-              className="w-12 h-12 rounded-xl flex items-center justify-center p-0 bg-black/80 border border-cyan-400/50 hover:border-yellow-500 text-cyan-400 hover:text-yellow-400 shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:shadow-[0_0_25px_rgba(255,230,0,0.5)] transition-all"
-            >
-              <ArrowUp className="w-5 h-5" />
-            </MagneticButton>
-          </div>
         </div>
 
-        {/* LOGO3.PNG LOGO MASSIVE - PLACED DIRECTLY BETWEEN SITEMAP ARCHITECTURE & MASSIVE OUTLINE TEXT */}
+        {/* LOGO3.PNG LOGO MASSIVE - CLICKABLE TO GO HOME */}
         <div className="my-10 flex items-center justify-center py-4">
-          <img src="/logo3.png" alt="GOAT STUDIOS Logo" className="logomassive" />
+          <a
+            href="#hero"
+            onClick={(e) => handleNavClick(e, "hero")}
+            className="cursor-pointer inline-block transition-transform hover:scale-105"
+            title="Return to Home"
+          >
+            <img src="/logo3.png" alt="GOAT STUDIOS Logo" className="logomassive" />
+          </a>
         </div>
 
         {/* Massive Background Logo statement */}
