@@ -22,9 +22,10 @@ export default function Footer() {
   return (
     <footer className="footer-section border-t border-cyan-500/20">
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center mb-16">
+        {/* Top 3-Column Navigation Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start mb-12">
           {/* Brand info column */}
-          <div className="md:col-span-4 flex flex-col gap-6">
+          <div className="md:col-span-5 flex flex-col gap-6">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-black border border-cyan-400/50 flex items-center justify-center p-1 shadow-[0_0_10px_rgba(0,240,255,0.3)]">
                 <GoatLogo className="w-full h-full" />
@@ -61,13 +62,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Massive Logo Image - Positioned between GOAT STUDIOS and Sitemap Architecture */}
-          <div className="md:col-span-3 flex items-center justify-center py-4">
-            <img src="/logo3.png" alt="GOAT STUDIOS Logo" className="logomassive" />
-          </div>
-
-          {/* Nav links column */}
-          <div className="md:col-span-4">
+          {/* Nav links column (SITEMAP ARCHITECTURE) */}
+          <div className="md:col-span-6">
             <h4 className="text-xs font-mono text-cyan-400 font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-cyan-400" />
               SITEMAP ARCHITECTURE
@@ -87,7 +83,7 @@ export default function Footer() {
           </div>
 
           {/* Action trigger column */}
-          <div className="md:col-span-1 flex items-center justify-end">
+          <div className="md:col-span-1 flex items-start justify-end">
             <MagneticButton
               onClick={handleScrollToTop}
               className="w-12 h-12 rounded-xl flex items-center justify-center p-0 bg-black/80 border border-cyan-400/50 hover:border-yellow-500 text-cyan-400 hover:text-yellow-400 shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:shadow-[0_0_25px_rgba(255,230,0,0.5)] transition-all"
@@ -95,6 +91,11 @@ export default function Footer() {
               <ArrowUp className="w-5 h-5" />
             </MagneticButton>
           </div>
+        </div>
+
+        {/* LOGO3.PNG LOGO MASSIVE - PLACED DIRECTLY BETWEEN SITEMAP ARCHITECTURE & MASSIVE OUTLINE TEXT */}
+        <div className="my-10 flex items-center justify-center py-4">
+          <img src="/logo3.png" alt="GOAT STUDIOS Logo" className="logomassive" />
         </div>
 
         {/* Massive Background Logo statement */}
