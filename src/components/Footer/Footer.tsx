@@ -87,25 +87,27 @@ export default function Footer() {
         </div>
 
         {/* LOGO3.PNG LOGO MASSIVE - CLICKABLE TO GO HOME */}
-        <div className="my-10 flex items-center justify-center py-4">
+
+        {/* <div className="my-10 flex items-center justify-center py-4">
           <a
             href="#hero"
             onClick={(e) => handleNavClick(e, "hero")}
             className="cursor-pointer inline-block transition-transform hover:scale-105"
             title="Return to Home"
           >
-            <img src="/logo3.png" alt="GOAT STUDIOS Logo" className="logomassive" />
+            {<img src="/logo3.png" alt="GOAT STUDIOS Logo" className="logomassive" />}
           </a>
-        </div>
+        </div> */}
+
 
         {/* Massive Background Logo statement */}
         <div className="my-16 select-none relative">
           <h2 className="footer-logo-text">
             GOAT STUDIOS
           </h2>
-          <div className="text-center font-mono text-[10px] text-yellow-400 tracking-[0.5em] uppercase font-bold mt-2">
+          {/* <div className="text-center font-mono text-[10px] text-yellow-400 tracking-[0.5em] uppercase font-bold mt-2">
             GLOBAL REACH
-          </div>
+          </div> */}
         </div>
 
         {/* Lower terms */}
