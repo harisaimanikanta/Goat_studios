@@ -6,34 +6,38 @@ export interface Track {
   audioUrl: string;
   youtubeId?: string;
   description: string;
+  status: string;
 }
 
 export const musicData: Track[] = [
   {
     id: "01",
     title: "GOAT STUDIOS ANTHEM",
-    album: "GOAT STUDIOS",
+    album: "GOAT STUDIOS VOL. 1",
     duration: "03:45",
-    audioUrl: "/audio/track-1.mp3",
+    audioUrl: "",
     youtubeId: "uXE4OrL0uXw",
-    description: "Official GOAT Studios synthetic acoustic soundtrack featuring procedural monoliths and 8K CGI visuals."
+    description: "Official GOAT Studios synthetic acoustic soundtrack featuring procedural monoliths and 8K CGI visuals.",
+    status: "STILL IN PRODUCTION"
   },
   {
     id: "02",
     title: "CYBERPUNK NEON DRIFT",
-    album: "GOAT STUDIOS",
+    album: "GOAT STUDIOS VOL. 1",
     duration: "04:12",
-    audioUrl: "/audio/track-2.mp3",
+    audioUrl: "",
     youtubeId: "uXE4OrL0uXw",
-    description: "Deep analog synth wave scoring spatial digital environments designed by GOAT Studios."
+    description: "Deep analog synth wave scoring spatial digital environments designed by GOAT Studios.",
+    status: "STILL IN PRODUCTION"
   },
   {
     id: "03",
     title: "QUANTUM MONOLITH",
-    album: "GOAT STUDIOS",
+    album: "GOAT STUDIOS VOL. 1",
     duration: "02:58",
-    audioUrl: "/audio/track-3.mp3",
+    audioUrl: "",
     youtubeId: "uXE4OrL0uXw",
-    description: "Modular analog synthesizer soundscapes engineered for luxury motion & digital realities."
+    description: "Modular analog synthesizer soundscapes engineered for luxury motion & digital realities.",
+    status: "STILL IN PRODUCTION"
   }
 ];

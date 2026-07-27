@@ -1,58 +1,21 @@
 import { useState, useEffect, useRef } from "react";
-import { Music as MusicIcon, Play, Pause, SkipBack, SkipForward, Volume2, Disc } from "lucide-react";
+import { 
+  Music as MusicIcon, 
+  Disc, 
+  Lock, 
+  Radio, 
+  Hammer, 
+  AlertTriangle 
+} from "lucide-react";
 import { musicData, Track } from "../../data/musicData";
 import "./Music.css";
 
 export default function Music() {
-  const [currentTrack, setCurrentTrack] = useState<Track>(musicData[0]);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.5);
-  
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [selectedTrack, setSelectedTrack] = useState<Track>(musicData[0]);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const visualizerAnimationFrameRef = useRef<number | null>(null);
 
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume;
-    }
-  }, [volume]);
-
-  useEffect(() => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.play().catch(e => {
-          console.error("Audio play failed:", e);
-          setIsPlaying(false);
-        });
-      } else {
-        audioRef.current.pause();
-      }
-    }
-  }, [isPlaying, currentTrack]);
-
-  const handlePlayPause = () => {
-    setIsPlaying(!isPlaying);
-  };
-
-  const selectTrack = (track: Track) => {
-    setCurrentTrack(track);
-    setIsPlaying(true);
-  };
-
-  const handlePrevTrack = () => {
-    const currentIndex = musicData.findIndex((t) => t.id === currentTrack.id);
-    const prevIndex = (currentIndex - 1 + musicData.length) % musicData.length;
-    selectTrack(musicData[prevIndex]);
-  };
-
-  const handleNextTrack = () => {
-    const currentIndex = musicData.findIndex((t) => t.id === currentTrack.id);
-    const nextIndex = (currentIndex + 1) % musicData.length;
-    selectTrack(musicData[nextIndex]);
-  };
-
-  // Fake visualizer since we can't reliably use Web Audio API Analyzer with external cross-origin media
+  // Standby Visualizer animation with Red Neon Signal
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -62,39 +25,30 @@ export default function Music() {
     let time = 0;
 
     const drawVisualizer = () => {
-      time += 0.05;
+      time += 0.03;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
+
       const width = canvas.width;
       const height = canvas.height;
       const centerY = height / 2;
 
+      // Draw subtle synth wave signal in standby mode (Red)
       ctx.beginPath();
       ctx.moveTo(0, centerY);
-      
+
       for (let i = 0; i < width; i++) {
         const x = i;
-        let y = centerY;
+        const wave1 = Math.sin((i * 0.03) + time) * 12;
+        const wave2 = Math.sin((i * 0.015) - time * 0.8) * 8;
+        const noise = (Math.random() - 0.5) * 2;
+        const taper = Math.sin((i / width) * Math.PI);
         
-        if (isPlaying) {
-          // Complex pseudo-random wave
-          const wave1 = Math.sin((i * 0.05) + time) * 20;
-          const wave2 = Math.sin((i * 0.02) - time * 1.5) * 15;
-          const noise = (Math.random() - 0.5) * 5;
-          
-          // Modulate amplitude based on x position (taper edges)
-          const taper = Math.sin((i / width) * Math.PI);
-          
-          y = centerY + (wave1 + wave2 + noise) * taper;
-        } else {
-          y = centerY + Math.sin(i * 0.02) * 2;
-        }
-
+        const y = centerY + (wave1 + wave2 + noise) * taper;
         ctx.lineTo(x, y);
       }
-      
-      ctx.strokeStyle = isPlaying ? "#00f0ff" : "#3f3f46";
-      ctx.lineWidth = 2;
+
+      ctx.strokeStyle = "#eb0029"; // Vibrant Red glowing studio standby line
+      ctx.lineWidth = 1.5;
       ctx.stroke();
 
       // Mirror reflection below
@@ -102,21 +56,15 @@ export default function Music() {
       ctx.moveTo(0, centerY);
       for (let i = 0; i < width; i++) {
         const x = i;
-        let y = centerY;
-        if (isPlaying) {
-          const wave1 = Math.sin((i * 0.05) + time) * 20;
-          const wave2 = Math.sin((i * 0.02) - time * 1.5) * 15;
-          const noise = (Math.random() - 0.5) * 5;
-          const taper = Math.sin((i / width) * Math.PI);
-          y = centerY - (wave1 + wave2 + noise) * taper * 0.5;
-        } else {
-          y = centerY - Math.sin(i * 0.02) * 2;
-        }
+        const wave1 = Math.sin((i * 0.03) + time) * 12;
+        const wave2 = Math.sin((i * 0.015) - time * 0.8) * 8;
+        const taper = Math.sin((i / width) * Math.PI);
+        const y = centerY - (wave1 + wave2) * taper * 0.4;
         ctx.lineTo(x, y);
       }
-      
-      ctx.strokeStyle = isPlaying ? "rgba(0, 240, 255, 0.2)" : "rgba(63, 63, 70, 0.2)";
-      ctx.lineWidth = 2;
+
+      ctx.strokeStyle = "rgba(235, 0, 41, 0.25)";
+      ctx.lineWidth = 1;
       ctx.stroke();
 
       visualizerAnimationFrameRef.current = requestAnimationFrame(drawVisualizer);
@@ -126,7 +74,7 @@ export default function Music() {
       const parent = canvas.parentElement;
       if (parent) {
         canvas.width = parent.clientWidth;
-        canvas.height = 100;
+        canvas.height = 90;
       }
     };
     resizeCanvas();
@@ -140,160 +88,185 @@ export default function Music() {
         cancelAnimationFrame(visualizerAnimationFrameRef.current);
       }
     };
-  }, [isPlaying]);
+  }, []);
 
   return (
-    <section id="music" className="music-section border-t border-cyan-500/20">
+    <section id="music" className="music-section border-t border-red-500/20">
       <div className="music-bg-glow" />
       <div className="max-w-7xl mx-auto relative z-10">
-        
-        {/* Hidden Audio Player */}
-        <audio 
-          ref={audioRef}
-          src={currentTrack.audioUrl}
-          onEnded={handleNextTrack}
-          crossOrigin="anonymous"
-        />
 
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
           <div>
-            <span className="text-xs font-mono tracking-[0.4em] text-cyan-400 uppercase font-bold flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-              [CYBER_SYNTH_SYNCHRONIZER]
-            </span>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white mt-4 uppercase">
-              AMBIENT <span className="stroke-text-cyber">PLAYER</span>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-xs font-mono tracking-[0.4em] text-red-400 uppercase font-bold flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
+                [AUDIO_SYNTHESIZER_LAB]
+              </span>
+              <span className="px-3 py-1 bg-red-500/15 border border-red-500/40 text-red-400 text-[10px] font-mono font-bold tracking-widest rounded-full uppercase flex items-center gap-1.5 shadow-[0_0_12px_rgba(235,0,41,0.25)]">
+                <Hammer className="w-3 h-3 text-red-400" />
+                STILL IN PRODUCTION
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white uppercase">
+              MUSIC & <span className="stroke-text-cyber text-red-500">SOUND DECK</span>
             </h2>
           </div>
           <p className="text-sm text-zinc-300 max-w-sm font-sans tracking-wide leading-relaxed font-light">
-            Real-time audio synth decks scoring the spatial digital environments designed by our team.
+            Original ambient soundtracks, sonic scoring, and spatial audio compositions being engineered for GOAT Studios environments.
           </p>
         </div>
 
-        {/* Player Dual Layout Panel */}
-        <div className="music-glass-panel grid grid-cols-1 lg:grid-cols-12 relative">
+        {/* Main Production Dashboard Container */}
+        <div className="music-glass-panel grid grid-cols-1 lg:grid-cols-12 relative border border-red-500/30">
           {/* Cyber HUD Corner Decorators */}
           <div className="cyber-corner-tl opacity-70" />
           <div className="cyber-corner-tr opacity-70" />
           <div className="cyber-corner-bl opacity-70" />
           <div className="cyber-corner-br opacity-70" />
 
-          {/* Left panel: Custom tracklists */}
-          <div className="lg:col-span-5 border-b lg:border-b-0 lg:border-r border-cyan-500/20 p-6 md:p-8">
-            <h3 className="text-xs font-mono text-cyan-400 tracking-widest mb-6 uppercase flex items-center gap-2 font-bold">
-              <MusicIcon className="w-4 h-4 text-yellow-400" /> AVAILABLE SYNTH DECKS
-            </h3>
-            <div className="flex flex-col">
-              {musicData.map((track) => (
-                <button
-                  key={track.id}
-                  onClick={() => selectTrack(track)}
-                  className={`music-track-item flex items-center justify-between p-4 text-left rounded-lg transition-all ${
-                    currentTrack.id === track.id ? "active text-white" : "text-zinc-400"
-                  }`}
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="text-xs font-mono text-cyan-400 font-bold">/{track.id}</span>
-                    <div>
-                      <h4 className="text-sm font-mono font-bold tracking-tight text-white">
-                        {track.title}
-                      </h4>
-                      <p className="text-xs font-mono text-zinc-400 uppercase mt-0.5">
-                        {track.album}
-                      </p>
-                    </div>
-                  </div>
-                  <span className="text-xs font-mono text-cyan-400">{track.duration}</span>
-                </button>
-              ))}
+          {/* Top Red Banner Notice inside Glass Panel */}
+          <div className="lg:col-span-12 bg-red-950/40 border-b border-red-500/30 p-4 md:px-8 md:py-5 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-red-500/20 border border-red-500/50 flex items-center justify-center text-red-400 shrink-0 shadow-[0_0_15px_rgba(235,0,41,0.3)]">
+                <AlertTriangle className="w-5 h-5 animate-pulse" />
+              </div>
+              <div>
+                <span className="text-xs font-mono font-bold text-red-400 uppercase tracking-widest block">
+                  SYSTEM STATUS // AUDIO LINKS DISABLED
+                </span>
+                <p className="text-xs text-zinc-300 font-mono mt-0.5">
+                  Audio links are currently disabled as tracks are still under production in the sound studio.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 text-xs font-mono text-red-400/90 bg-black/50 px-4 py-2 rounded-lg border border-red-500/20 shrink-0 uppercase font-bold">
+              <Hammer className="w-4 h-4 text-red-400" />
+              <span>STILL IN PRODUCTION</span>
             </div>
           </div>
 
-          {/* Right panel: Active controls & interactive canvas */}
-          <div className="lg:col-span-7 p-6 md:p-8 flex flex-col justify-between min-h-[400px]">
-            {/* Header */}
-            <div className="flex justify-between items-start">
-              <div>
-                <span className="text-[10px] font-mono text-yellow-400 tracking-[0.3em] uppercase block font-bold">
-                  [SYNTH_MODULATION_ENGINE]
-                </span>
-                <h3 className="text-2xl font-mono font-bold tracking-tight text-white mt-1">
-                  {currentTrack.title}
-                </h3>
-                <p className="text-xs text-zinc-300 font-sans tracking-wide leading-relaxed font-light mt-2 max-w-md">
-                  {currentTrack.description}
-                </p>
+          {/* Left Column: Scheduled Synth Decks (Disabled Links View) */}
+          <div className="lg:col-span-5 border-b lg:border-b-0 lg:border-r border-red-500/20 p-6 md:p-8">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xs font-mono text-red-400 tracking-widest uppercase flex items-center gap-2 font-bold">
+                <MusicIcon className="w-4 h-4 text-red-400" /> PRODUCED SOUNDTRACKS
+              </h3>
+              <span className="text-[10px] font-mono text-zinc-400 font-bold">
+                [3 TRACKS]
+              </span>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              {musicData.map((track) => {
+                const isSelected = selectedTrack.id === track.id;
+                return (
+                  <div
+                    key={track.id}
+                    onClick={() => setSelectedTrack(track)}
+                    className={`music-track-item flex items-center justify-between p-4 rounded-xl transition-all cursor-pointer border ${
+                      isSelected
+                        ? "bg-red-500/10 border-red-500/60 text-white shadow-[0_0_15px_rgba(235,0,41,0.15)]"
+                        : "bg-black/40 border-red-500/10 text-zinc-400 hover:border-red-500/30 hover:bg-black/60"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3.5">
+                      <div className="w-8 h-8 rounded-lg bg-black/80 border border-red-500/30 flex items-center justify-center text-red-400 font-mono text-xs font-bold">
+                        /{track.id}
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-mono font-bold tracking-tight text-white flex items-center gap-2">
+                          {track.title}
+                        </h4>
+                        <p className="text-[11px] font-mono text-zinc-400 uppercase mt-0.5">
+                          {track.album}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs font-mono text-zinc-500">{track.duration}</span>
+                      <div 
+                        className="w-8 h-8 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400/70 flex items-center justify-center cursor-not-allowed"
+                        title="Audio links disabled - track under production"
+                      >
+                        <Lock className="w-3.5 h-3.5 text-red-400" />
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Clean Notice Card */}
+            <div className="mt-6 p-4 rounded-xl bg-black/60 border border-red-500/20 flex items-center gap-3">
+              <Hammer className="w-4 h-4 text-red-400 animate-pulse shrink-0" />
+              <span className="text-xs font-mono text-zinc-300">
+                Music & Sound Deck: <strong className="text-red-400 font-bold uppercase">STILL IN PRODUCTION</strong>
+              </span>
+            </div>
+          </div>
+
+          {/* Right Column: Active Track Telemetry Dashboard */}
+          <div className="lg:col-span-7 p-6 md:p-8 flex flex-col justify-between">
+            <div>
+              {/* Selected Track Metadata HUD */}
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[10px] font-mono text-red-400 tracking-[0.3em] uppercase font-bold">
+                      [TRACK_METADATA_PREVIEW]
+                    </span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-mono font-bold tracking-tight text-white mt-1">
+                    {selectedTrack.title}
+                  </h3>
+                  <p className="text-xs text-zinc-300 font-sans tracking-wide leading-relaxed font-light mt-2 max-w-lg">
+                    {selectedTrack.description}
+                  </p>
+                </div>
+                
+                {/* Vinyl Record Icon with Lock overlay */}
+                <div className="relative p-3.5 bg-black/90 border border-red-500/40 rounded-full shadow-[0_0_20px_rgba(235,0,41,0.25)] shrink-0">
+                  <Disc className="w-7 h-7 text-red-400/80" />
+                  <div className="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center">
+                    <Lock className="w-4 h-4 text-red-400" />
+                  </div>
+                </div>
               </div>
-              {/* Animated vinyl disk */}
-              <div className={`p-3 bg-black/80 border border-cyan-400/50 rounded-full shadow-[0_0_15px_rgba(0,240,255,0.3)] ${isPlaying ? "animate-spin border-yellow-500 shadow-[0_0_20px_rgba(255,230,0,0.5)]" : ""}`} style={{ animationDuration: "12s" }}>
-                <Disc className="w-6 h-6 text-cyan-400" />
+
+              {/* Real-time Red Studio Standby Visualizer */}
+              <div className="my-6">
+                <div className="flex justify-between items-center text-xs font-mono text-red-400 mb-2 font-bold">
+                  <span className="flex items-center gap-1.5">
+                    <Radio className="w-3.5 h-3.5" /> STUDIO FREQUENCY MONITOR // STANDBY
+                  </span>
+                  <span className="text-red-400 animate-pulse flex items-center gap-1 font-bold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
+                    STANDBY PREVIEW
+                  </span>
+                </div>
+                <canvas ref={canvasRef} className="player-visualizer-canvas border border-red-500/30" />
+              </div>
+
+              {/* Studio Telemetry Grid Cards */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 my-6">
+                <div className="p-3 rounded-lg bg-black/50 border border-red-500/20">
+                  <span className="text-[9px] font-mono text-zinc-500 block uppercase">SAMPLE RATE</span>
+                  <span className="text-xs font-mono text-white font-bold">96 kHz / 24-Bit</span>
+                </div>
+                <div className="p-3 rounded-lg bg-black/50 border border-red-500/20">
+                  <span className="text-[9px] font-mono text-zinc-500 block uppercase">AUDIO FORMAT</span>
+                  <span className="text-xs font-mono text-red-400 font-bold">FLAC & Spatial 3D</span>
+                </div>
+                <div className="p-3 rounded-lg bg-black/50 border border-red-500/20 col-span-2 sm:col-span-1">
+                  <span className="text-[9px] font-mono text-zinc-500 block uppercase">TRACK LINK STATUS</span>
+                  <span className="text-xs font-mono text-red-400 font-bold">STILL IN PRODUCTION</span>
+                </div>
               </div>
             </div>
 
-            {/* Visualizer Canvas container */}
-            <div className="my-8">
-              <div className="flex justify-between items-center text-xs font-mono text-cyan-400 mb-2 font-bold">
-                <span>DIGITAL AUDIO WAVEFORM // HERTZ_HARMONICS</span>
-                <span className={isPlaying ? "text-yellow-400 animate-pulse" : "text-zinc-500"}>
-                  {isPlaying ? "● MODULATOR ACTIVE" : "○ STANDBY"}
-                </span>
-              </div>
-              <canvas ref={canvasRef} className="player-visualizer-canvas" />
-            </div>
-
-            {/* Controls interface */}
-            <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-6">
-              {/* Media buttons */}
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={handlePrevTrack}
-                  className="w-11 h-11 rounded-xl bg-black border border-cyan-400/50 hover:border-yellow-500 text-cyan-400 hover:text-yellow-400 hover:shadow-[0_0_15px_rgba(255,230,0,0.4)] flex items-center justify-center transition-all cursor-pointer"
-                  aria-label="Previous Track"
-                  title="Previous Track"
-                >
-                  <SkipBack className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={handlePlayPause}
-                  className="w-14 h-14 rounded-xl bg-gradient-to-r from-cyan-400 to-yellow-500 text-black hover:scale-105 flex items-center justify-center transition-all shadow-[0_0_25px_rgba(0,240,255,0.5)] cursor-pointer"
-                  aria-label={isPlaying ? "Pause" : "Play"}
-                  title={isPlaying ? "Pause" : "Play"}
-                >
-                  {isPlaying ? (
-                    <Pause className="w-6 h-6 fill-current" />
-                  ) : (
-                    <Play className="w-6 h-6 fill-current ml-1" />
-                  )}
-                </button>
-                <button
-                  onClick={handleNextTrack}
-                  className="w-11 h-11 rounded-xl bg-black border border-cyan-400/50 hover:border-yellow-500 text-cyan-400 hover:text-yellow-400 hover:shadow-[0_0_15px_rgba(255,230,0,0.4)] flex items-center justify-center transition-all cursor-pointer"
-                  aria-label="Next Track"
-                  title="Next Track"
-                >
-                  <SkipForward className="w-4 h-4" />
-                </button>
-              </div>
-
-              {/* Volume Slider */}
-              <div className="flex items-center gap-3">
-                <Volume2 className="w-4 h-4 text-cyan-400" />
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.05"
-                  value={volume}
-                  onChange={(e) => setVolume(parseFloat(e.target.value))}
-                  className="w-32 h-1 bg-zinc-900 rounded-lg appearance-none cursor-pointer accent-cyan-400"
-                  aria-label="Volume Slider"
-                />
-                <span className="text-xs font-mono text-cyan-400 font-bold w-8 text-right">
-                  {Math.floor(volume * 100)}%
-                </span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
