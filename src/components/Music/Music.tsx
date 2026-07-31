@@ -99,10 +99,6 @@ export default function Music() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
           <div>
             <div className="flex items-center gap-3 mb-3">
-              <span className="text-xs font-mono tracking-[0.4em] text-red-400 uppercase font-bold flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
-                [AUDIO_SYNTHESIZER_LAB]
-              </span>
               <span className="px-3 py-1 bg-red-500/15 border border-red-500/40 text-red-400 text-[10px] font-mono font-bold tracking-widest rounded-full uppercase flex items-center gap-1.5 shadow-[0_0_12px_rgba(235,0,41,0.25)]">
                 <Hammer className="w-3 h-3 text-red-400" />
                 STILL IN PRODUCTION

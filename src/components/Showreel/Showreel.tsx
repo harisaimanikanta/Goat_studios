@@ -24,11 +24,7 @@ export default function Showreel() {
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-xs font-mono tracking-[0.4em] text-cyan-400 uppercase font-bold flex items-center justify-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-            [CYBER_VISUAL_VELOCITY]
-          </span>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white mt-4 uppercase">
+          <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white uppercase">
             CINEMATIC <span className="stroke-text-cyber">SHOWREEL</span>
           </h2>
         </div>

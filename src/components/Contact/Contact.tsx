@@ -49,11 +49,7 @@ export default function Contact() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-6">
           <div>
-            <span className="text-xs font-mono tracking-[0.4em] text-cyan-400 uppercase font-bold flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-              [INITIATE_STUDIO_DIRECTIVE]
-            </span>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white mt-4 uppercase">
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white uppercase">
               CO<span className="stroke-text-cyber">LLABORATE</span>
             </h2>
           </div>

@@ -125,10 +125,7 @@ export default function Gallery() {
         <div className="max-w-7xl mx-auto px-6 mb-16">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
             <div>
-              <span className="text-xs font-mono tracking-[0.4em] text-purple-500 uppercase">
-                STUDIO EXPLORATIONS
-              </span>
-              <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white mt-4 uppercase">
+              <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white uppercase">
                 TEXTURES & <span className="stroke-text">SPACES</span>
               </h2>
             </div>

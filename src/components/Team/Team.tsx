@@ -16,11 +16,7 @@ export default function Team() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-6">
           <div>
-            <span className="text-xs font-mono tracking-[0.4em] text-cyan-400 uppercase font-bold flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-              [CREATIVE_ARCHITECTS_HUB]
-            </span>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white mt-4 uppercase">
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white uppercase">
               THE <span className="stroke-text-cyber">TEAM</span>
             </h2>
           </div>
@@ -66,13 +62,6 @@ export default function Team() {
                   referrerPolicy="no-referrer"
                 />
                 <div className="team-portrait-overlay" />
-
-                {/* Studio Location Pill Badge */}
-                <div className="absolute top-4 left-4 z-20">
-                  <span className={`px-2.5 py-1 rounded text-[9px] font-mono font-bold tracking-widest uppercase border bg-cyan-950/90 border-cyan-400/50 text-cyan-300 shadow-[0_0_12px_rgba(0,240,255,0.3)]`}>
-                    GLOBAL
-                  </span>
-                </div>
 
                 {/* Floating Social Handles - Reveals on Hover */}
                 <div className="absolute top-4 right-4 flex flex-col gap-2 z-20 opacity-0 transform translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-400">
