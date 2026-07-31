@@ -6,6 +6,12 @@
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .footer-section {
+    padding: 3rem 1.25rem 2rem 1.25rem;
+  }
+}
+
 .footer-nav-link {
   font-family: var(--font-mono);
   font-size: 0.8rem;

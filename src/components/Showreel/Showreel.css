@@ -6,6 +6,12 @@
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .showreel-section {
+    padding: 3rem 1.25rem;
+  }
+}
+
 .showreel-container {
   position: relative;
   width: 100%;

@@ -6,6 +6,12 @@
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .music-section {
+    padding: 3rem 1.25rem;
+  }
+}
+
 .music-glass-panel {
   background: linear-gradient(135deg, rgba(20, 8, 10, 0.88) 0%, rgba(10, 5, 6, 0.96) 100%);
   backdrop-filter: blur(20px);

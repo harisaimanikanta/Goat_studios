@@ -18,7 +18,7 @@ export default function Footer() {
     <footer className="footer-section border-t border-cyan-500/20">
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Top Navigation Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start mb-6 md:mb-12">
           {/* Brand info column */}
           <div className="md:col-span-5 flex flex-col gap-6">
             <div className="flex items-center gap-3">

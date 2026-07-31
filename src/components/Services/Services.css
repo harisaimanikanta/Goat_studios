@@ -6,6 +6,12 @@
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .services-section {
+    padding: 3rem 1.25rem;
+  }
+}
+
 .services-unit-wrapper {
   width: 100%;
   margin: 0 auto;

@@ -48,6 +48,7 @@ export default function CinematicLogoReveal() {
 
   const hasTriggered = useRef(false);
   const [isSettled, setIsSettled] = useState(false);
+  const [isTwoLine, setIsTwoLine] = useState(false);
 
   const sparksRef = useRef<Spark[]>([]);
   const ambientRef = useRef<AmbientDot[]>([]);
@@ -59,7 +60,6 @@ export default function CinematicLogoReveal() {
     trailIntensity: 0,
     laserScanX: -200,
     laserScanActive: 0,
-    idleScanX: -300,
     shockwaveProgress: 0,
     shockwaveOpacity: 0,
   });
@@ -106,14 +106,6 @@ export default function CinematicLogoReveal() {
     const tl = gsap.timeline({
       onComplete: () => {
         setIsSettled(true);
-        // Periodic TRON Laser Sweep Idle Loop (every 4 seconds)
-        gsap.to(animState.current, {
-          idleScanX: isMobile ? 600 : 1400,
-          duration: 1.8,
-          repeat: -1,
-          repeatDelay: 2.5,
-          ease: "power2.inOut",
-        });
       },
     });
 
@@ -236,37 +228,60 @@ export default function CinematicLogoReveal() {
     );
   };
 
-  // Auto-fit the wordmark to the container width so it never clips off-screen
-  // on narrow phones. Runs on mount, on resize, and on orientation change.
+  // Fit the wordmark to the screen: try it on one line first, and only if it
+  // genuinely doesn't fit, wrap it onto two lines ("GOAT" / "STUDIOS") instead
+  // of shrinking the text down until it's illegible. Also guards against a
+  // container that auto-sizes to its content (which would otherwise always
+  // "fit" by definition) by capping against the real viewport width too.
   useEffect(() => {
     const fitLogoToContainer = () => {
       const container = containerRef.current;
       const logo = logoRef.current;
       if (!container || !logo) return;
 
-      // Reset scale before measuring natural width, otherwise we'd measure
-      // an already-shrunk element and the scale would compound on itself.
-      gsap.set(logo, { scale: 1 });
-
-      const containerWidth = container.clientWidth;
-      const naturalWidth = logo.scrollWidth;
       const isMobile = window.innerWidth <= 768;
-      const horizontalPadding = isMobile ? 24 : 48;
-      const available = containerWidth - horizontalPadding;
+      const horizontalPadding = isMobile ? 20 : 48;
+      const viewportWidth = document.documentElement.clientWidth || window.innerWidth;
+      const containerWidth = container.clientWidth || viewportWidth;
+      const available = Math.min(containerWidth, viewportWidth) - horizontalPadding;
 
-      const scale =
-        naturalWidth > available
-          ? Math.max(available / naturalWidth, 0.42)
-          : 1;
+      // Step 1: force single line and measure it at natural size.
+      gsap.set(logo, { scale: 1 });
+      logo.style.whiteSpace = "nowrap";
+      const singleLineWidth = logo.scrollWidth;
 
-      gsap.set(logo, { scale, transformOrigin: "50% 50%" });
+      if (singleLineWidth <= available) {
+        setIsTwoLine(false);
+        gsap.set(logo, { scale: 1, transformOrigin: "50% 50%" });
+        return;
+      }
+
+      // Step 2: doesn't fit on one line -- wrap between the two words instead
+      // of squeezing everything down small.
+      setIsTwoLine(true);
+      logo.style.whiteSpace = "normal";
+
+      // Let the wrap settle, then measure the widest resulting line as a
+      // safety net in case even "STUDIOS" alone can't fit (very old/small phones).
+      requestAnimationFrame(() => {
+        if (!logoRef.current) return;
+        const wrappedWidth = logoRef.current.scrollWidth;
+        const scale =
+          wrappedWidth > available ? Math.max(available / wrappedWidth, 0.55) : 1;
+        gsap.set(logoRef.current, { scale, transformOrigin: "50% 50%" });
+      });
     };
 
     fitLogoToContainer();
+    // Re-check shortly after mount too -- web fonts swapping in after first
+    // paint can change text width and invalidate the first measurement.
+    const fontSettleId = window.setTimeout(fitLogoToContainer, 250);
+
     window.addEventListener("resize", fitLogoToContainer);
     window.addEventListener("orientationchange", fitLogoToContainer);
 
     return () => {
+      window.clearTimeout(fontSettleId);
       window.removeEventListener("resize", fitLogoToContainer);
       window.removeEventListener("orientationchange", fitLogoToContainer);
     };
@@ -350,6 +365,7 @@ export default function CinematicLogoReveal() {
     if (!ctx) return;
 
     let animFrameId: number;
+    const activeDprRef = { current: 1 };
 
     const getCanvasHeight = () => (window.innerWidth <= 768 ? 260 : 520);
 
@@ -357,13 +373,24 @@ export default function CinematicLogoReveal() {
       const parent = containerRef.current;
       if (!parent) return;
       const rect = parent.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const isMobileNow = window.innerWidth <= 768;
+      // Capping DPR to 1 on mobile roughly halves (or quarters, on 3x-density
+      // phones) the pixels the canvas has to push every frame. At this canvas
+      // size the crispness difference is not worth the frame-rate cost.
+      const dpr = isMobileNow ? 1 : Math.min(window.devicePixelRatio || 1, 2);
+      activeDprRef.current = dpr;
       const canvasH = getCanvasHeight();
 
       canvas.width = rect.width * dpr;
       canvas.height = canvasH * dpr;
       canvas.style.width = `${rect.width}px`;
       canvas.style.height = `${canvasH}px`;
+      // Reset the transform before scaling -- ctx.scale() is multiplicative,
+      // so without this every resize event (mobile browsers fire these
+      // constantly as the address bar shows/hides) compounds on the last one
+      // and the whole scene silently zooms in more each time, which both
+      // mis-renders everything and tanks frame rate.
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
     };
 
@@ -371,7 +398,7 @@ export default function CinematicLogoReveal() {
     window.addEventListener("resize", resizeCanvas);
 
     const isMobile = window.innerWidth <= 768;
-    const trailCount = isMobile ? 8 : 16;
+    const trailCount = isMobile ? 5 : 16;
 
     // Initialize TRON Light Cycle Beams
     const trails: TronLightTrail[] = Array.from({ length: trailCount }, (_, i) => {
@@ -410,11 +437,12 @@ export default function CinematicLogoReveal() {
     });
 
     // Initialize slow-drifting ambient light motes (constant atmospheric depth layer)
-    const ambientCount = isMobile ? 18 : 36;
+    const ambientCount = isMobile ? 8 : 36;
+    const initialWidth = canvas.clientWidth || 800;
     ambientRef.current = Array.from({ length: ambientCount }, () => {
       const canvasH = getCanvasHeight();
       return {
-        x: Math.random() * 800,
+        x: Math.random() * initialWidth,
         y: Math.random() * canvasH,
         vx: (Math.random() - 0.5) * 0.15,
         vy: (Math.random() - 0.5) * 0.15,
@@ -430,7 +458,7 @@ export default function CinematicLogoReveal() {
     // Render TRON Frame Loop
     const render = () => {
       tick++;
-      const w = canvas.width / (window.devicePixelRatio || 1);
+      const w = canvas.width / activeDprRef.current;
       const h = getCanvasHeight();
       const cx = w / 2;
       const cy = h / 2;
@@ -441,7 +469,6 @@ export default function CinematicLogoReveal() {
         gridOpacity,
         trailIntensity,
         laserScanX,
-        idleScanX,
         shockwaveProgress,
         shockwaveOpacity,
       } = animState.current;
@@ -463,8 +490,13 @@ export default function CinematicLogoReveal() {
           const twinkle = 0.6 + Math.sin(dot.twinklePhase) * 0.4;
           ctx.globalAlpha = dot.baseAlpha * twinkle * Math.max(gridOpacity, trailIntensity * 0.6);
           ctx.fillStyle = dot.color;
-          ctx.shadowColor = dot.color;
-          ctx.shadowBlur = 6;
+          // shadowBlur is one of the costliest canvas 2D ops and this runs per-dot,
+          // per-frame -- skip it on mobile where dozens of dots would otherwise
+          // each trigger a soft-blur pass every tick.
+          if (!isMobile) {
+            ctx.shadowColor = dot.color;
+            ctx.shadowBlur = 6;
+          }
           ctx.beginPath();
           ctx.arc(dot.x, dot.y, dot.size, 0, Math.PI * 2);
           ctx.fill();
@@ -563,7 +595,7 @@ export default function CinematicLogoReveal() {
             ctx.strokeStyle = t.color;
             ctx.lineWidth = isMobile ? 1.8 : 2.5;
             ctx.shadowColor = t.color;
-            ctx.shadowBlur = isMobile ? 8 : 15;
+            ctx.shadowBlur = isMobile ? 5 : 15;
             ctx.globalAlpha = trailIntensity * 0.8;
             ctx.stroke();
 
@@ -622,9 +654,9 @@ export default function CinematicLogoReveal() {
         ctx.restore();
       }
 
-      // 5. Draw TRON Laser Sweep Line
-      const currentScanX = isSettled ? idleScanX : laserScanX;
-      if (currentScanX > -100 && currentScanX < w + 150) {
+      // 5. Draw TRON Laser Sweep Line (intro only -- no more repeating idle sweep)
+      const currentScanX = laserScanX;
+      if (!isSettled && currentScanX > -100 && currentScanX < w + 150) {
         ctx.save();
         ctx.globalCompositeOperation = "lighter";
 
@@ -682,7 +714,10 @@ export default function CinematicLogoReveal() {
         }}
       />
 
-      <h2 ref={logoRef} className="tron-logo-heading footer-logo-text">
+      <h2
+        ref={logoRef}
+        className={`tron-logo-heading footer-logo-text${isTwoLine ? " tron-logo-two-line" : ""}`}
+      >
         {LOGO_TEXT.split("").map((char, i) => (
           <span
             key={i}
@@ -691,7 +726,9 @@ export default function CinematicLogoReveal() {
             }}
             className="tron-char"
           >
-            {char === " " ? "\u00A0" : char}
+            {/* A real breakable space (not nbsp) so the browser can wrap
+                between "GOAT" and "STUDIOS" when isTwoLine kicks in. */}
+            {char}
           </span>
         ))}
       </h2>
