@@ -93,9 +93,8 @@ export default function Navbar() {
           className="flex items-center gap-3.5 group text-white transition-all duration-300"
         >
           {/* Cyberpunk Neon Goat Studio Logo Mark */}
-          <div className="relative w-10 h-10 rounded-xl bg-black/90 border border-cyan-400/50 flex items-center justify-center transition-all duration-300 group-hover:border-yellow-500 group-hover:shadow-[0_0_20px_rgba(255,230,0,0.5)] shadow-[0_0_15px_rgba(0,240,255,0.3)] overflow-hidden p-1.5">
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-yellow-500/10 pointer-events-none" />
-            <GoatLogo className="w-full h-full transform group-hover:scale-110 transition-transform duration-300 relative z-10" />
+          <div className="relative w-10 h-10 rounded-xl bg-black/90 border border-cyan-400/50 flex items-center justify-center transition-all duration-300 group-hover:border-yellow-500 group-hover:shadow-[0_0_20px_rgba(255,230,0,0.5)] shadow-[0_0_15px_rgba(0,240,255,0.3)] overflow-hidden">
+            <GoatLogo className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300 relative z-10" />
           </div>
           
           <div className="flex flex-col">

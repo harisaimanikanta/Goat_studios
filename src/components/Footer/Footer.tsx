@@ -22,8 +22,8 @@ export default function Footer() {
           {/* Brand info column */}
           <div className="md:col-span-5 flex flex-col gap-6">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-black border border-cyan-400/50 flex items-center justify-center p-1 shadow-[0_0_10px_rgba(0,240,255,0.3)]">
-                <GoatLogo className="w-full h-full" />
+              <div className="w-9 h-9 rounded-xl bg-black border border-cyan-400/50 flex items-center justify-center overflow-hidden shadow-[0_0_10px_rgba(0,240,255,0.3)]">
+                <GoatLogo className="w-full h-full object-cover" />
               </div>
               <span className="text-2xl font-black font-mono tracking-tighter text-white">
                 GOAT<span className="text-cyan-400">.</span>STUDIOS

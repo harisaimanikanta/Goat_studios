@@ -10,7 +10,7 @@ export default function GoatLogo({ className = "w-6 h-6" }: GoatLogoProps) {
     <img
       src="/logo.png"
       alt="GOAT STUDIOS Logo"
-      className={`object-contain rounded ${className}`}
+      className={`object-cover ${className}`}
       referrerPolicy="no-referrer"
     />
   );
