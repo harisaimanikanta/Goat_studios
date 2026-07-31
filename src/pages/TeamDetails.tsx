@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { teamData } from "../data/teamData";
-import { ArrowLeft, ArrowRight, Home, Instagram, Twitter, Linkedin, MessageSquare, Coffee } from "lucide-react";
+import { ArrowLeft, ArrowRight, Home, Instagram, Twitter, Linkedin, MessageSquare } from "lucide-react";
 import MagneticButton from "../components/Button/MagneticButton";
 
 export default function TeamDetails() {
@@ -131,78 +131,35 @@ export default function TeamDetails() {
                 </p>
               </div>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="cyber-card p-6">
-                  <h4 className="text-xs font-mono text-yellow-400 font-bold tracking-widest mb-4 uppercase">Social Links</h4>
-                  <div className="flex flex-col gap-4">
-                    {member.socials.instagram && (
-                      <a href={member.socials.instagram} className="flex items-center gap-3 text-white hover:text-cyan-400 transition-colors group">
-                        <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                        <span className="font-mono text-sm tracking-wide">Instagram</span>
-                      </a>
-                    )}
-                    {member.socials.twitter && (
-                      <a href={member.socials.twitter} className="flex items-center gap-3 text-white hover:text-cyan-400 transition-colors group">
-                        <Twitter className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                        <span className="font-mono text-sm tracking-wide">Twitter</span>
-                      </a>
-                    )}
-                    {member.socials.linkedin && (
-                      <a href={member.socials.linkedin} className="flex items-center gap-3 text-white hover:text-cyan-400 transition-colors group">
-                        <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                        <span className="font-mono text-sm tracking-wide">LinkedIn</span>
-                      </a>
-                    )}
-                    {member.socials.whatsapp && (
-                      <a href={member.socials.whatsapp} className="flex items-center gap-3 text-white hover:text-green-400 transition-colors group">
-                        <MessageSquare className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                        <span className="font-mono text-sm tracking-wide">WhatsApp</span>
-                      </a>
-                    )}
-                    {Object.keys(member.socials).length === 0 && (
-                      <span className="text-zinc-500 font-mono text-sm">NO PUBLIC LINKS</span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Support / UPI Payment Card */}
-                <div className="cyber-card p-6 flex flex-col justify-center items-center text-center gap-4">
-                  {member.qrCode ? (
-                    <>
-                      <h4 className="text-xs font-mono text-cyan-400 font-bold tracking-widest uppercase">Support / Direct UPI</h4>
-                      <img 
-                        src={member.qrCode} 
-                        alt="PhonePe QR Code" 
-                        className="w-64 h-64 sm:w-72 sm:h-72 object-contain mix-blend-screen hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_25px_rgba(250,204,21,0.45)]" 
-                      />
-                      {member.upiId && (
-                        <div className="flex flex-col items-center gap-1.5 w-full">
-                          <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">UPI ID</span>
-                          <a
-                            href={`upi://pay?pa=${member.upiId}&pn=${encodeURIComponent(member.name)}&cu=INR`}
-                            className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-yellow-500/20 to-cyan-500/20 border border-yellow-400/60 text-yellow-300 font-mono text-xs font-bold hover:bg-yellow-400 hover:text-black transition-all shadow-[0_0_15px_rgba(250,204,21,0.2)] tracking-wider"
-                          >
-                            {member.upiId}
-                          </a>
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <>
-                      <div>
-                        <h4 className="text-xs font-mono text-cyan-400 font-bold tracking-widest mb-2 uppercase">Support Creativity</h4>
-                        <p className="text-sm text-zinc-400 font-sans">Fuel my next big project by buying me a coffee.</p>
-                      </div>
-                      <a 
-                        href="https://buymeacoffee.com"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex items-center justify-center gap-3 px-6 py-3 w-full rounded bg-zinc-900 border border-yellow-500/30 text-white hover:text-yellow-400 hover:border-yellow-400 transition-all duration-300 group shadow-[0_0_15px_rgba(250,204,21,0.1)] hover:shadow-[0_0_20px_rgba(250,204,21,0.3)]"
-                      >
-                        <Coffee className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                        <span className="text-sm font-mono font-bold tracking-widest uppercase">Support Me</span>
-                      </a>
-                    </>
+              <div className="cyber-card p-6">
+                <h4 className="text-xs font-mono text-yellow-400 font-bold tracking-widest mb-4 uppercase">Social Links</h4>
+                <div className="flex flex-col gap-4">
+                  {member.socials.instagram && (
+                    <a href={member.socials.instagram} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-white hover:text-cyan-400 transition-colors group">
+                      <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                      <span className="font-mono text-sm tracking-wide">Instagram</span>
+                    </a>
+                  )}
+                  {member.socials.twitter && (
+                    <a href={member.socials.twitter} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-white hover:text-cyan-400 transition-colors group">
+                      <Twitter className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                      <span className="font-mono text-sm tracking-wide">Twitter</span>
+                    </a>
+                  )}
+                  {member.socials.linkedin && (
+                    <a href={member.socials.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-white hover:text-cyan-400 transition-colors group">
+                      <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                      <span className="font-mono text-sm tracking-wide">LinkedIn</span>
+                    </a>
+                  )}
+                  {member.socials.whatsapp && (
+                    <a href={member.socials.whatsapp} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-white hover:text-green-400 transition-colors group">
+                      <MessageSquare className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                      <span className="font-mono text-sm tracking-wide">WhatsApp</span>
+                    </a>
+                  )}
+                  {Object.keys(member.socials).length === 0 && (
+                    <span className="text-zinc-500 font-mono text-sm">NO PUBLIC LINKS</span>
                   )}
                 </div>
               </div>

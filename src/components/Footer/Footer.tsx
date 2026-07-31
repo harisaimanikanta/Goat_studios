@@ -2,6 +2,7 @@ import React from "react";
 import { SECTIONS, SOCIAL_LINKS, BRAND_INFO } from "../../utils/constants";
 import { Instagram, Twitter, Youtube } from "lucide-react";
 import GoatLogo from "../GoatLogo";
+import CinematicLogoReveal from "./CinematicLogoReveal";
 import "./Footer.css";
 
 export default function Footer() {
@@ -86,29 +87,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* LOGO3.PNG LOGO MASSIVE - CLICKABLE TO GO HOME */}
-
-        {/* <div className="my-10 flex items-center justify-center py-4">
-          <a
-            href="#hero"
-            onClick={(e) => handleNavClick(e, "hero")}
-            className="cursor-pointer inline-block transition-transform hover:scale-105"
-            title="Return to Home"
-          >
-            {<img src="/logo3.png" alt="GOAT STUDIOS Logo" className="logomassive" />}
-          </a>
-        </div> */}
-
-
-        {/* Massive Background Logo statement */}
-        <div className="my-16 select-none relative">
-          <h2 className="footer-logo-text">
-            GOAT STUDIOS
-          </h2>
-          {/* <div className="text-center font-mono text-[10px] text-yellow-400 tracking-[0.5em] uppercase font-bold mt-2">
-            GLOBAL REACH
-          </div> */}
-        </div>
+        {/* Cinematic Energy Awakening Logo Statement */}
+        <CinematicLogoReveal />
 
         {/* Lower terms */}
         <div className="pt-8 border-t border-cyan-500/20 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] font-mono text-cyan-400 font-bold tracking-wider uppercase">
